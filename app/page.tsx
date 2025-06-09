@@ -4,48 +4,115 @@ import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {
-  Shield,
-  Zap,
-  Database,
-  Key,
-  Users,
-  Webhook,
-  Eye,
-  Cloud,
-  Terminal,
-  Check,
-  ArrowRight,
-  ExternalLink,
-} from "lucide-react"
+import { Shield, Zap, Database, Key, Users, Eye, Cloud, Terminal, Check, ArrowRight, ExternalLink } from "lucide-react"
 import { EnhancedTextGlow } from "@/components/enhanced-text-glow"
 import { CyberCard } from "@/components/cyber-card"
 
 export default function RyzorLanding() {
-  const [glitchText, setGlitchText] = useState("Ryzor.cc")
+  const [isHoveringTitle, setIsHoveringTitle] = useState(false)
+  const glitchIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const hoverGlitchIntervalRef = useRef<NodeJS.Timeout | null>(null)
+  const originalText = "Ryzor.cc"
+  const [glitchText, setGlitchText] = useState(originalText)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const glitchInterval = setInterval(() => {
-      const glitchChars = "!@#$%^&*()_+-=[]{}|;:,.<>?"
-      const original = "Ryzor.cc"
-      let glitched = ""
+  // Generates a more subtle character glitch
+  const generateSubtleGlitchedText = (textToGlitch: string) => {
+    let glitched = ""
+    let changesMade = 0
+    const maxChanges = 1 // Allow only 1 or 2 character changes per glitch update
 
-      for (let i = 0; i < original.length; i++) {
-        if (Math.random() < 0.1) {
-          glitched += glitchChars[Math.floor(Math.random() * glitchChars.length)]
+    for (let i = 0; i < textToGlitch.length; i++) {
+      const char = textToGlitch[i]
+      const randomThreshold = Math.random()
+
+      if (changesMade < maxChanges && randomThreshold < 0.1) {
+        // Low chance to change a char
+        if ((char === "o" || char === "O") && Math.random() < 0.7) {
+          glitched += "0"
+          changesMade++
+        } else if (char.match(/[a-zA-Z]/) && Math.random() < 0.3) {
+          glitched += Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase()
+          changesMade++
         } else {
-          glitched += original[i]
+          glitched += char
         }
+      } else {
+        glitched += char
       }
+    }
+    // If no changes were made but we wanted one (e.g. for a noticeable flicker)
+    // ensure at least one very minor change like a case flip if possible.
+    if (changesMade === 0 && textToGlitch.length > 0) {
+      const randomIndex = Math.floor(Math.random() * textToGlitch.length)
+      const charToChange = textToGlitch[randomIndex]
+      if (charToChange.match(/[a-zA-Z]/)) {
+        const originalChars = glitched.split("")
+        originalChars[randomIndex] = Math.random() < 0.5 ? charToChange.toUpperCase() : charToChange.toLowerCase()
+        if (originalChars[randomIndex] === charToChange && charToChange.toLowerCase() === "o") {
+          // if case flip didn't change 'o'
+          originalChars[randomIndex] = "0"
+        }
+        glitched = originalChars.join("")
+      } else if (charToChange === "o" || charToChange === "O") {
+        const originalChars = glitched.split("")
+        originalChars[randomIndex] = "0"
+        glitched = originalChars.join("")
+      }
+    }
+    return glitched
+  }
 
-      setGlitchText(glitched)
-      setTimeout(() => setGlitchText(original), 100)
-    }, 3000)
+  useEffect(() => {
+    const normalGlitchLogic = () => {
+      const glitchDuration = Math.random() * 100 + 50 // 50-150ms visible glitch
+      setGlitchText(generateSubtleGlitchedText(originalText))
+      setTimeout(() => {
+        if (!isHoveringTitle) {
+          setGlitchText(originalText)
+        }
+      }, glitchDuration)
+    }
 
-    return () => clearInterval(glitchInterval)
-  }, [])
+    const hoverGlitchLogic = () => {
+      setGlitchText(generateSubtleGlitchedText(originalText))
+    }
+
+    if (isHoveringTitle) {
+      if (glitchIntervalRef.current) {
+        clearInterval(glitchIntervalRef.current)
+        glitchIntervalRef.current = null
+      }
+      if (!hoverGlitchIntervalRef.current) {
+        hoverGlitchLogic() // Initial glitch on hover
+        hoverGlitchIntervalRef.current = setInterval(hoverGlitchLogic, 150) // Subtle changes every 150ms on hover
+      }
+    } else {
+      if (hoverGlitchIntervalRef.current) {
+        clearInterval(hoverGlitchIntervalRef.current)
+        hoverGlitchIntervalRef.current = null
+      }
+      setGlitchText(originalText)
+      if (!glitchIntervalRef.current) {
+        setTimeout(normalGlitchLogic, Math.random() * 1500 + 800) // Normal interval: 0.8-2.3 seconds
+        glitchIntervalRef.current = setInterval(normalGlitchLogic, Math.random() * 2000 + 1000)
+      }
+    }
+
+    return () => {
+      if (glitchIntervalRef.current) clearInterval(glitchIntervalRef.current)
+      if (hoverGlitchIntervalRef.current) clearInterval(hoverGlitchIntervalRef.current)
+    }
+  }, [isHoveringTitle])
+
+  const handleTitleMouseEnter = () => {
+    setIsHoveringTitle(true)
+  }
+
+  const handleTitleMouseLeave = () => {
+    setIsHoveringTitle(false)
+  }
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -86,11 +153,6 @@ export default function RyzorLanding() {
       description: "Mass-join links instantly",
     },
     {
-      icon: Webhook,
-      title: "Webhook Nuker",
-      description: "Kill webhooks in seconds",
-    },
-    {
       icon: Eye,
       title: "Presence Spoofer",
       description: "Fake online status, any mode",
@@ -118,33 +180,28 @@ export default function RyzorLanding() {
   ]
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#0d0d0d] text-white overflow-x-hidden spotlight-container">
-      {/* Enhanced Animated Background */}
+    <div ref={containerRef} className="min-h-screen text-white overflow-x-hidden spotlight-container">
       <div className="cyber-background">
-        <div className="nebula-layer" />
-        <div className="particle-field" />
-        <div className="diagonal-scanlines" />
-        <div className="scanline-sweep" />
+        <div className="animated-grid parallax-slow" />
+        <div className="digital-fog parallax-medium">
+          <div className="fog-layer-1" />
+          <div className="fog-layer-2" />
+          <div className="fog-layer-3" />
+        </div>
+        <div className="scanlines-overlay" />
+        <div className="digital-noise-overlay" />
+        <div className="crt-glow" />
       </div>
 
-      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center px-4">
         <div className="container mx-auto text-center z-10 max-w-6xl px-4">
           <div className="mb-12 slide-in-up" style={{ minHeight: "fit-content", overflow: "visible" }}>
             <div className="mb-8" style={{ overflow: "visible", minHeight: "fit-content" }}>
               <h1
-                className="text-7xl md:text-9xl font-bold font-display mb-6"
-                style={{
-                  lineHeight: "1.1",
-                  padding: "0.2em 0",
-                  background: "linear-gradient(45deg, #ff0033, #ff3366, #ff0033)",
-                  backgroundSize: "200% 200%",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  filter: "drop-shadow(0 0 15px rgba(255, 0, 51, 0.6))",
-                  animation: "text-shimmer 3s ease-in-out infinite",
-                }}
+                className="text-7xl md:text-9xl font-bold font-display mb-6 cyber-title" // cyber-title now includes subtle visual glitch animation
+                onMouseEnter={handleTitleMouseEnter}
+                onMouseLeave={handleTitleMouseLeave}
+                style={{ cursor: "pointer" }}
               >
                 {glitchText}
               </h1>
@@ -171,7 +228,6 @@ export default function RyzorLanding() {
             </Button>
           </div>
 
-          {/* Enhanced Dashboard Preview */}
           <div className="cyber-glass-card max-w-5xl mx-auto p-8 slide-in-up delay-300">
             <div className="flex items-center justify-between mb-6">
               <div className="flex space-x-3">
@@ -186,7 +242,7 @@ export default function RyzorLanding() {
                 <span className="text-[#ff0033] font-mono">ryzor@cloud:~$</span>
               </div>
               <div className="p-6 font-mono text-sm space-y-2">
-                <div className="text-green-400 flex items-center">
+                <div className="text-green-400 flex items-center justify-center w-full">
                   <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>✓ NITRO CLAIMED — in
                   0.29s
                 </div>
@@ -200,12 +256,14 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      {/* Enhanced Features Section */}
       <section className="py-32 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-20 slide-in-up">
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 slide-in-up">
-              Unleash Discord. On Your Terms. <EnhancedTextGlow intensity="high">For Free.</EnhancedTextGlow>
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 slide-in-up cyber-title">
+              Unleash Discord. On Your Terms.{" "}
+              <EnhancedTextGlow intensity="high" className="font-bold">
+                For Free.
+              </EnhancedTextGlow>
             </h2>
           </div>
 
@@ -226,7 +284,6 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      {/* Enhanced Tool Showcase */}
       <section className="py-32 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="cyber-glass-card p-10 slide-in-up">
@@ -240,7 +297,9 @@ export default function RyzorLanding() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div className="space-y-6 slide-in-left delay-200">
                 <div className="cyber-glass-card p-6">
-                  <h4 className="text-xl font-bold mb-4 neon-accent">Nitro Sniper Status</h4>
+                  <h4 className="text-xl font-bold mb-4">
+                    <EnhancedTextGlow intensity="medium">Nitro Sniper Status</EnhancedTextGlow>
+                  </h4>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span>Speed:</span>
@@ -290,11 +349,13 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      {/* Enhanced Security Section */}
       <section className="py-32 px-4">
         <div className="container mx-auto text-center max-w-6xl">
           <h2 className="text-5xl md:text-7xl font-bold mb-12 cyber-title slide-in-up">
-            We Don't Want Your Token. <span className="neon-accent">Period.</span>
+            We Don't Want Your Token.{" "}
+            <EnhancedTextGlow intensity="high" className="font-bold">
+              Period.
+            </EnhancedTextGlow>
           </h2>
 
           <div className="max-w-5xl mx-auto">
@@ -315,7 +376,7 @@ export default function RyzorLanding() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { icon: Shield, title: "Zero Token Retention", desc: "Your tokens never touch our servers" },
+                { icon: Shield, title: "Zero Token Retention", desc: "Your tokens are never saved" },
                 { icon: Key, title: "Client-Side Only", desc: "All encryption happens in your browser" },
                 { icon: Terminal, title: "Open Source Frontend", desc: "Verify our security claims yourself" },
               ].map((item, index) => (
@@ -332,7 +393,6 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      {/* Enhanced Testimonials */}
       <section className="py-32 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -340,7 +400,7 @@ export default function RyzorLanding() {
               <div key={index} className={`cyber-glass-card p-8 chat-log slide-in-up delay-${(index + 1) * 100}`}>
                 <div className="flex items-center mb-4">
                   <div className="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-                  <span className="font-mono font-bold neon-accent">{testimonial.user}</span>
+                  <span className="font-mono font-bold text-gray-200">{testimonial.user}</span>
                 </div>
                 <p className="text-gray-300 mb-4 text-lg">"{testimonial.message}"</p>
                 <div className="text-sm text-gray-500">— Using Ryzor.cc Free</div>
@@ -350,18 +410,23 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      {/* Enhanced Pricing Section */}
       <section className="py-32 px-4">
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-5xl md:text-7xl font-bold mb-16 cyber-title slide-in-up">
-            Zero Limits. <span className="neon-accent">Zero Cost.</span>
+            Zero Limits.{" "}
+            <EnhancedTextGlow intensity="high" className="font-bold">
+              Zero Cost.
+            </EnhancedTextGlow>
           </h2>
 
           <div className="max-w-lg mx-auto slide-in-up delay-200">
             <Card className="cyber-glass-card p-10 pulse-glow">
               <div className="text-6xl mb-6">🔓</div>
-              <h3 className="text-4xl font-bold mb-8 neon-accent">Free Forever</h3>
-
+              <h3 className="text-4xl font-bold mb-8">
+                <EnhancedTextGlow intensity="high" className="font-bold">
+                  Free Forever
+                </EnhancedTextGlow>
+              </h3>
               <div className="space-y-4 mb-10 text-left">
                 {["Full tool access", "No usage limits", "Encrypted backups", "No credit cards, no signups"].map(
                   (feature, index) => (
@@ -372,18 +437,15 @@ export default function RyzorLanding() {
                   ),
                 )}
               </div>
-
               <Button className="cyber-button-primary w-full text-xl py-6 mb-6">
                 Start Using Ryzor – No Signups, No BS
               </Button>
-
               <p className="text-gray-400">No credit card. No trials. Just power.</p>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Footer */}
       <footer className="py-16 px-4 border-t border-red-900/30">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center">
