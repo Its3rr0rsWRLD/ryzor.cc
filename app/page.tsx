@@ -1,12 +1,16 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Shield, Zap, Database, Key, Users, Eye, Cloud, Terminal, Check, ArrowRight, ExternalLink } from "lucide-react"
+import { Shield, Zap, Database, Key, Users, Eye, Cloud, Terminal, Check } from "lucide-react"
 import { EnhancedTextGlow } from "@/components/enhanced-text-glow"
 import { CyberCard } from "@/components/cyber-card"
+import { ComingSoonPopup } from "@/components/coming-soon-popup"
+import { ArrowRight, ExternalLink } from "lucide-react" // Ensure these are imported if not already
 
 export default function RyzorLanding() {
   const [isHoveringTitle, setIsHoveringTitle] = useState(false)
@@ -179,6 +183,14 @@ export default function RyzorLanding() {
     },
   ]
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+
+  const openPopup = (e: React.MouseEvent) => {
+    e.preventDefault() // Prevent default anchor behavior if buttons were links
+    setIsPopupOpen(true)
+  }
+  const closePopup = () => setIsPopupOpen(false)
+
   return (
     <div ref={containerRef} className="min-h-screen text-white overflow-x-hidden spotlight-container">
       <div className="cyber-background">
@@ -218,11 +230,11 @@ export default function RyzorLanding() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 slide-in-up delay-200">
-            <Button className="cyber-button-primary text-lg px-10 py-5 text-white">
+            <Button className="cyber-button text-lg px-10 py-5" onClick={openPopup}>
               Launch Dashboard
               <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
-            <Button className="cyber-button text-lg px-10 py-5">
+            <Button className="cyber-button text-lg px-10 py-5" onClick={openPopup}>
               Join Telegram
               <ExternalLink className="ml-3 h-5 w-5" />
             </Button>
@@ -468,6 +480,7 @@ export default function RyzorLanding() {
           </div>
         </div>
       </footer>
+      <ComingSoonPopup isOpen={isPopupOpen} onClose={closePopup} />
     </div>
   )
 }
