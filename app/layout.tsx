@@ -6,9 +6,9 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
-  generator: "v0.dev",
+  title: "Ryzor.cc",
+  description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
