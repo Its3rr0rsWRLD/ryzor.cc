@@ -192,12 +192,12 @@ export default function RyzorLanding() {
         <div className="crt-glow" />
       </div>
 
-      <section className="relative min-h-screen flex items-center justify-center px-4">
+      <section className="relative min-h-screen flex items-center justify-center mobile-container-padding">
         <div className="container mx-auto text-center z-10 max-w-6xl px-4">
-          <div className="mb-12 slide-in-up" style={{ minHeight: "fit-content", overflow: "visible" }}>
-            <div className="mb-8" style={{ overflow: "visible", minHeight: "fit-content" }}>
+          <div className="mb-8 md:mb-12 slide-in-up" style={{ minHeight: "fit-content", overflow: "visible" }}>
+            <div className="mb-6 md:mb-8" style={{ overflow: "visible", minHeight: "fit-content" }}>
               <h1
-                className="text-7xl md:text-9xl font-bold font-display mb-6 cyber-title"
+                className="mobile-heading-xl font-bold font-display mb-4 md:mb-6 cyber-title"
                 onMouseEnter={handleTitleMouseEnter}
                 onMouseLeave={handleTitleMouseLeave}
                 style={{ cursor: "pointer" }}
@@ -205,7 +205,7 @@ export default function RyzorLanding() {
                 {glitchText}
               </h1>
             </div>
-            <div className="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+            <div className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-6 md:mb-8 max-w-4xl mx-auto leading-relaxed mobile-optimized-text">
               <div className="mb-2">Your cloud-based Discord arsenal. Always-on.</div>
               <div>
                 Always one step ahead.{" "}
@@ -216,25 +216,25 @@ export default function RyzorLanding() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 slide-in-up delay-200">
-            <Button className="cyber-button text-lg px-10 py-5" onClick={openPopup}>
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center mb-12 md:mb-16 slide-in-up delay-200">
+            <Button className="cyber-button touch-target-large text-base md:text-lg px-8 md:px-10 py-4 md:py-5" onClick={openPopup}>
               Launch Dashboard
-              <ArrowRight className="ml-3 h-5 w-5" />
+              <ArrowRight className="ml-2 md:ml-3 h-4 w-4 md:h-5 md:w-5" />
             </Button>
-            <Button className="cyber-button text-lg px-10 py-5" onClick={openPopup}>
+            <Button className="cyber-button touch-target-large text-base md:text-lg px-8 md:px-10 py-4 md:py-5" onClick={openPopup}>
               Join Telegram
-              <ExternalLink className="ml-3 h-5 w-5" />
+              <ExternalLink className="ml-2 md:ml-3 h-4 w-4 md:h-5 md:w-5" />
             </Button>
           </div>
 
-          <div className="cyber-glass-card max-w-5xl mx-auto p-8 slide-in-up delay-300">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex space-x-3">
-                <div className="w-4 h-4 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
-                <div className="w-4 h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
-                <div className="w-4 h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
+          <div className="cyber-glass-card max-w-5xl mx-auto p-4 md:p-8 slide-in-up delay-300">
+            <div className="flex items-center justify-between mb-4 md:mb-6">
+              <div className="flex space-x-2 md:space-x-3">
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-red-500 shadow-lg shadow-red-500/50"></div>
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/50"></div>
+                <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-green-500 shadow-lg shadow-green-500/50"></div>
               </div>
-              <span className="font-mono text-sm text-gray-400">ryzor.cc/dashboard</span>
+              <span className="font-mono text-xs md:text-sm text-gray-400">ryzor.cc/dashboard</span>
             </div>
             {/* This is the container that will expand from the bottom */}
             <div
@@ -244,9 +244,9 @@ export default function RyzorLanding() {
                 {" "}
                 {/* This is the actual terminal box style */}
                 {/* Removed the ryzor@cloud:~$ TypeAnimation and its header */}
-                <div className="p-6 font-mono text-sm space-y-2">
+                <div className="p-4 md:p-6 font-mono text-xs md:text-sm space-y-2">
                   <div className="text-green-400 flex items-center justify-center w-full">
-                    <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>✓ NITRO CLAIMED — in
+                    <span className="w-2 h-2 bg-green-400 rounded-full mr-2 md:mr-3 animate-pulse"></span>✓ NITRO CLAIMED — in
                     0.29s
                   </div>
                   <div className="text-blue-400">→ Monitoring 47 servers...</div>
@@ -259,28 +259,26 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      <section className="py-16 px-4">
-        {" "}
-        {/* Changed py-32 to py-16 */}
+      <section className="mobile-section-padding">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-20 slide-in-up">
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 slide-in-up cyber-title">
+          <div className="text-center mb-12 md:mb-20 slide-in-up">
+            <h2 className="mobile-heading-lg font-bold mb-4 md:mb-6 slide-in-up cyber-title">
               Unleash Discord. On Your Terms.{" "}
               <EnhancedTextGlow intensity="high" className="font-bold">
                 For Free.
               </EnhancedTextGlow>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto relative z-0">
             {features.map((feature, index) => (
-              <CyberCard key={index} className={`p-8 slide-in-up delay-${(index + 1) * 100}`}>
-                <div className="flex items-center mb-6">
-                  <div className="p-3 rounded-lg bg-[#ff0033]/10 border border-[#ff0033]/20 mr-4">
-                    <feature.icon className="h-8 w-8 text-[#ff0033]" />
+              <CyberCard key={index} className={`p-6 md:p-8 slide-in-up delay-${(index + 1) * 100}`}>
+                <div className="flex items-center mb-4 md:mb-6">
+                  <div className="p-2 md:p-3 rounded-lg bg-[#ff0033]/10 border border-[#ff0033]/20 mr-3 md:mr-4">
+                    <feature.icon className="h-6 w-6 md:h-8 md:w-8 text-[#ff0033]" />
                   </div>
-                  <h3 className="text-xl font-bold">{feature.title}</h3>
+                  <h3 className="text-lg md:text-xl font-bold">{feature.title}</h3>
                 </div>
-                <p className="text-gray-300 mb-6 leading-relaxed">{feature.description}</p>
+                <p className="text-gray-300 mb-4 md:mb-6 leading-relaxed mobile-optimized-text">{feature.description}</p>
                 <Badge className="cyber-badge">FREE ACCESS</Badge>
               </CyberCard>
             ))}
@@ -288,43 +286,43 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      <section className="py-32 px-4">
+      <section className="mobile-section-padding">
         <div className="container mx-auto max-w-7xl">
-          <div className="cyber-glass-card p-10 slide-in-up">
-            <div className="flex flex-wrap gap-4 mb-8">
-              <Button className="cyber-button active bg-[#ff0033]/20 border-[#ff0033]">Sniper</Button>
-              <Button className="cyber-button">Backup</Button>
-              <Button className="cyber-button">Joiner</Button>
-              <Button className="cyber-button">Vault</Button>
+          <div className="cyber-glass-card p-6 md:p-10 slide-in-up">
+            <div className="flex flex-wrap gap-3 md:gap-4 mb-6 md:mb-8">
+              <Button className="cyber-button active bg-[#ff0033]/20 border-[#ff0033] touch-target">Sniper</Button>
+              <Button className="cyber-button touch-target">Backup</Button>
+              <Button className="cyber-button touch-target">Joiner</Button>
+              <Button className="cyber-button touch-target">Vault</Button>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div className="space-y-6 slide-in-left delay-200">
-                <div className="cyber-glass-card p-6">
-                  <h4 className="text-xl font-bold mb-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+              <div className="space-y-4 md:space-y-6 slide-in-left delay-200">
+                <div className="cyber-glass-card p-4 md:p-6">
+                  <h4 className="text-lg md:text-xl font-bold mb-3 md:mb-4">
                     <EnhancedTextGlow intensity="medium">Nitro Sniper Status</EnhancedTextGlow>
                   </h4>
-                  <div className="space-y-4">
+                  <div className="space-y-3 md:space-y-4">
                     <div className="flex justify-between items-center">
-                      <span>Speed:</span>
-                      <span className="text-green-400 font-mono">0.29s avg</span>
+                      <span className="mobile-optimized-text">Speed:</span>
+                      <span className="text-green-400 font-mono text-sm md:text-base">0.29s avg</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span>Success Rate:</span>
-                      <span className="text-green-400 font-mono">94.7%</span>
+                      <span className="mobile-optimized-text">Success Rate:</span>
+                      <span className="text-green-400 font-mono text-sm md:text-base">94.7%</span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span>Servers Monitored:</span>
-                      <span className="text-blue-400 font-mono">47</span>
+                      <span className="mobile-optimized-text">Servers Monitored:</span>
+                      <span className="text-blue-400 font-mono text-sm md:text-base">47</span>
                     </div>
                   </div>
                 </div>
-                <div className="cyber-glass-card p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-semibold">Auto-Claim</span>
+                <div className="cyber-glass-card p-4 md:p-6">
+                  <div className="flex items-center justify-between mb-3 md:mb-4">
+                    <span className="font-semibold mobile-optimized-text">Auto-Claim</span>
                     <div className="toggle-switch active"></div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold">Delay (ms)</span>
+                    <span className="font-semibold mobile-optimized-text">Delay (ms)</span>
                     <input type="range" className="slider" min="0" max="1000" defaultValue="290" />
                   </div>
                 </div>
@@ -332,10 +330,10 @@ export default function RyzorLanding() {
               <div className="slide-in-right delay-300">
                 <div className="cyber-terminal">
                   <div className="cyber-terminal-header">
-                    <Terminal className="h-4 w-4 text-[#ff0033]" />
+                    <Terminal className="h-3 w-3 md:h-4 md:w-4 text-[#ff0033]" />
                     <span className="text-[#ff0033] font-mono">Live Terminal</span>
                   </div>
-                  <div className="p-6 font-mono text-sm space-y-3">
+                  <div className="p-4 md:p-6 font-mono text-xs md:text-sm space-y-2 md:space-y-3">
                     <div className="text-green-400">✓ CLAIMED — Nitro Gift in 0.29s</div>
                     <div className="text-blue-400">→ Monitoring discord.gg/example...</div>
                     <div className="text-yellow-400">⚡ Queue: 3 pending</div>
@@ -350,18 +348,18 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      <section className="py-32 px-4">
+      <section className="mobile-section-padding">
         <div className="container mx-auto text-center max-w-6xl">
-          <h2 className="text-5xl md:text-7xl font-bold mb-12 cyber-title slide-in-up">
+          <h2 className="mobile-heading-lg font-bold mb-8 md:mb-12 cyber-title slide-in-up">
             We Don't Want Your Token.{" "}
             <EnhancedTextGlow intensity="high" className="font-bold">
               Period.
             </EnhancedTextGlow>
           </h2>
           <div className="max-w-5xl mx-auto">
-            <div className="cyber-terminal mb-12 slide-in-up delay-200">
+            <div className="cyber-terminal mb-8 md:mb-12 slide-in-up delay-200">
               <div className="cyber-terminal-header">
-                <Terminal className="h-5 w-5 text-[#ff0033]" />
+                <Terminal className="h-4 w-4 md:h-5 md:w-5 text-[#ff0033]" />
                 <TypeAnimation
                   sequence={[securityTerminalBaseDelay + 200, "Security Protocol"]}
                   speed={50}
@@ -371,11 +369,11 @@ export default function RyzorLanding() {
                   wrapper="span"
                 />
               </div>
-              <div className="p-8 text-left font-mono">
+              <div className="p-4 md:p-8 text-left font-mono">
                 <TypeAnimation
                   sequence={[securityTerminalBaseDelay + 800, "$ encrypt --token ************ --AES256"]}
                   speed={30}
-                  className="text-[#ff0033] mb-2 block"
+                  className="text-[#ff0033] mb-2 block text-xs md:text-sm"
                   cursor={false}
                   repeat={0}
                   wrapper="span"
@@ -383,7 +381,7 @@ export default function RyzorLanding() {
                 <TypeAnimation
                   sequence={[securityTerminalBaseDelay + 2200, "✔ Success. Your token doesn't save to the server."]}
                   speed={30}
-                  className="text-green-400 mb-2 block"
+                  className="text-green-400 mb-2 block text-xs md:text-sm"
                   cursor={false}
                   repeat={0}
                   wrapper="span"
@@ -391,7 +389,7 @@ export default function RyzorLanding() {
                 <TypeAnimation
                   sequence={[securityTerminalBaseDelay + 3700, "→ Client-side encryption active"]}
                   speed={30}
-                  className="text-blue-400 mb-2 block"
+                  className="text-blue-400 mb-2 block text-xs md:text-sm"
                   cursor={false}
                   repeat={0}
                   wrapper="span"
@@ -399,7 +397,7 @@ export default function RyzorLanding() {
                 <TypeAnimation
                   sequence={[securityTerminalBaseDelay + 5000, "→ Zero server retention policy"]}
                   speed={30}
-                  className="text-yellow-400 mb-2 block"
+                  className="text-yellow-400 mb-2 block text-xs md:text-sm"
                   cursor={false}
                   repeat={0}
                   wrapper="span"
@@ -407,7 +405,7 @@ export default function RyzorLanding() {
                 <TypeAnimation
                   sequence={[securityTerminalBaseDelay + 6300, "→ Open source verification available"]}
                   speed={30}
-                  className="text-purple-400 block"
+                  className="text-purple-400 block text-xs md:text-sm"
                   cursor={true}
                   repeat={0}
                   wrapper="span"
@@ -415,18 +413,18 @@ export default function RyzorLanding() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
               {[
                 { icon: Shield, title: "Zero Token Retention", desc: "Your tokens are never saved" },
                 { icon: Key, title: "Client-Side Only", desc: "All encryption happens in your browser" },
                 { icon: Terminal, title: "Open Source Frontend", desc: "Verify our security claims yourself" },
               ].map((item, index) => (
-                <div key={index} className={`cyber-glass-card p-8 slide-in-up delay-${(index + 3) * 100}`}>
-                  <div className="p-4 rounded-lg bg-[#ff0033]/10 border border-[#ff0033]/20 w-fit mx-auto mb-6">
-                    <item.icon className="h-12 w-12 text-[#ff0033]" />
+                <div key={index} className={`cyber-glass-card p-6 md:p-8 slide-in-up delay-${(index + 3) * 100}`}>
+                  <div className="p-3 md:p-4 rounded-lg bg-[#ff0033]/10 border border-[#ff0033]/20 w-fit mx-auto mb-4 md:mb-6">
+                    <item.icon className="h-8 w-8 md:h-12 md:w-12 text-[#ff0033]" />
                   </div>
-                  <h3 className="text-xl font-bold mb-4">{item.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{item.desc}</p>
+                  <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4">{item.title}</h3>
+                  <p className="text-gray-300 leading-relaxed mobile-optimized-text">{item.desc}</p>
                 </div>
               ))}
             </div>
@@ -434,79 +432,79 @@ export default function RyzorLanding() {
         </div>
       </section>
 
-      <section className="py-32 px-4">
+      <section className="mobile-section-padding">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className={`cyber-glass-card p-8 chat-log slide-in-up delay-${(index + 1) * 100}`}>
-                <div className="flex items-center mb-4">
-                  <div className="w-3 h-3 bg-green-400 rounded-full mr-3 animate-pulse"></div>
-                  <span className="font-mono font-bold text-gray-200">{testimonial.user}</span>
+              <div key={index} className={`cyber-glass-card p-6 md:p-8 chat-log slide-in-up delay-${(index + 1) * 100}`}>
+                <div className="flex items-center mb-3 md:mb-4">
+                  <div className="w-2 h-2 md:w-3 md:h-3 bg-green-400 rounded-full mr-2 md:mr-3 animate-pulse"></div>
+                  <span className="font-mono font-bold text-gray-200 text-sm md:text-base">{testimonial.user}</span>
                 </div>
-                <p className="text-gray-300 mb-4 text-lg">"{testimonial.message}"</p>
-                <div className="text-sm text-gray-500">— Using Ryzor.cc Free</div>
+                <p className="text-gray-300 mb-3 md:mb-4 text-base md:text-lg mobile-optimized-text">"{testimonial.message}"</p>
+                <div className="text-xs md:text-sm text-gray-500">— Using Ryzor.cc Free</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-32 px-4">
+      <section className="mobile-section-padding">
         <div className="container mx-auto text-center max-w-4xl">
-          <h2 className="text-5xl md:text-7xl font-bold mb-16 cyber-title slide-in-up">
+          <h2 className="mobile-heading-lg font-bold mb-12 md:mb-16 cyber-title slide-in-up">
             Zero Limits.{" "}
             <EnhancedTextGlow intensity="high" className="font-bold">
               Zero Cost.
             </EnhancedTextGlow>
           </h2>
           <div className="max-w-lg mx-auto slide-in-up delay-200">
-            <Card className="cyber-glass-card p-10 pulse-glow">
-              <div className="text-6xl mb-6">🔓</div>
-              <h3 className="text-4xl font-bold mb-8">
+            <Card className="cyber-glass-card p-8 md:p-10 pulse-glow">
+              <div className="text-4xl md:text-6xl mb-4 md:mb-6">🔓</div>
+              <h3 className="text-2xl md:text-4xl font-bold mb-6 md:mb-8">
                 <EnhancedTextGlow intensity="high" className="font-bold">
                   Free Forever
                 </EnhancedTextGlow>
               </h3>
-              <div className="space-y-4 mb-10 text-left">
+              <div className="space-y-3 md:space-y-4 mb-8 md:mb-10 text-left">
                 {["Full tool access", "No usage limits", "Encrypted backups", "No credit cards"].map(
                   (feature, index) => (
                     <div key={index} className="flex items-center">
-                      <Check className="h-6 w-6 text-green-400 mr-4" />
-                      <span className="text-lg">{feature}</span>
+                      <Check className="h-5 w-5 md:h-6 md:w-6 text-green-400 mr-3 md:mr-4 flex-shrink-0" />
+                      <span className="text-base md:text-lg mobile-optimized-text">{feature}</span>
                     </div>
                   ),
                 )}
               </div>
-              <Button className="cyber-button-primary w-full text-xl py-6 mb-6">Start Using Ryzor – 100% Free</Button>
-              <p className="text-gray-400">No credit card. No trials. Just power.</p>
+              <Button className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-5 md:py-6 mb-4 md:mb-6">Start Using Ryzor – 100% Free</Button>
+              <p className="text-gray-400 mobile-optimized-text">No credit card. No trials. Just power.</p>
             </Card>
           </div>
         </div>
       </section>
 
-      <footer className="py-16 px-4 border-t border-red-900/30">
+      <footer className="py-12 md:py-16 px-4 border-t border-red-900/30">
         <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0 text-center md:text-left">
-              <p className="text-gray-400 text-lg">Ryzor.cc © 2025</p>
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+            <div className="text-center md:text-left">
+              <p className="text-gray-400 text-base md:text-lg">Ryzor.cc © 2025</p>
               <p className="font-mono text-sm text-gray-500 mt-2">
                 This platform is free for all. Built for the underground.
               </p>
             </div>
-            <div className="flex flex-wrap gap-8 text-sm">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-8 text-sm text-center">
               <Link
                 href="/zero-access-security-policy"
-                className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300"
+                className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300 touch-target"
               >
                 Zero-Access Security Policy
               </Link>
               <Link
                 href="/discord-tos-disclaimer"
-                className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300"
+                className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300 touch-target"
               >
                 Discord TOS Disclaimer
               </Link>
-              <a href="#" className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300">
+              <a href="#" className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300 touch-target">
                 Contact: support@ryzor.cc
               </a>
             </div>

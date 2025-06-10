@@ -6,19 +6,32 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Ryzor.cc",
-  description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free",
+  title: "Ryzor.cc - Your Cloud-Based Discord Arsenal",
+  description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free. Nitro sniper, account backups, token vault, and more - all 100% free.",
+  keywords: "Discord, Nitro Sniper, Account Backup, Token Vault, Auto Joiner, Presence Spoofer, Cloud Control, Server Scraper, Server Cloner, Open Source, Free Discord Tools",
+  authors: [{ name: "Ryzor.cc Team" }],
+  creator: "Ryzor.cc",
+  publisher: "Ryzor.cc",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://ryzor.cc"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Ryzor.cc",
-    description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free.",
-    url: "https://ryzor.cc", // Replace with your actual domain
+    title: "Ryzor.cc - Your Cloud-Based Discord Arsenal",
+    description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free. Nitro sniper, account backups, token vault, and more - all 100% free.",
+    url: "https://ryzor.cc",
     siteName: "Ryzor.cc",
     images: [
       {
-        url: "/og-image.png", // Path to your image in the public folder
-        width: 1920, // The actual width of your image
-        height: 1080, // The actual height of your image
-        alt: "Ryzor.cc hero section with glowing red text and a terminal display.",
+        url: "/og-image.png",
+        width: 1920,
+        height: 1080,
+        alt: "Ryzor.cc - Cloud-based Discord arsenal with cyberpunk design featuring glowing red terminal interface",
       },
     ],
     locale: "en_US",
@@ -26,11 +39,27 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ryzor.cc",
-    description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free.",
-    images: ["/og-image.png"], // Path to your image in the public folder
+    title: "Ryzor.cc - Your Cloud-Based Discord Arsenal",
+    description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free. Nitro sniper, account backups, token vault, and more - all 100% free.",
+    images: ["/og-image.png"],
+    creator: "@ryzorcc",
   },
-    generator: 'v0.dev'
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code", // Replace with actual verification code
+  },
+  category: "technology",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -40,6 +69,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+        <meta name="theme-color" content="#ff0033" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Ryzor.cc" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   )

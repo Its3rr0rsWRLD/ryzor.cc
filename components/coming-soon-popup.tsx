@@ -63,14 +63,14 @@ export function ComingSoonPopup({ isOpen, onClose }: ComingSoonPopupProps) {
         }
       `}</style>
       <CyberCard
-        className={`p-8 md:p-10 text-center relative max-w-lg w-full ${animationClass}`}
+        className={`p-6 md:p-8 lg:p-10 text-center relative max-w-sm sm:max-w-md lg:max-w-lg w-full mx-4 ${animationClass}`}
         hoverEffect={false}
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside card
       >
         <div className="mb-6 md:mb-8">
           <EnhancedTextGlow intensity="high" color="#ff0033">
             <h2
-              className="text-4xl md:text-5xl font-bold font-display cyber-title !text-4xl md:!text-5xl !filter-none"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold font-display cyber-title !filter-none"
               style={{ WebkitTextFillColor: "unset" }}
             >
               Coming Soon!
@@ -78,14 +78,14 @@ export function ComingSoonPopup({ isOpen, onClose }: ComingSoonPopupProps) {
           </EnhancedTextGlow>
         </div>
 
-        <p className="text-lg md:text-xl text-gray-300 mb-8 leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-8 leading-relaxed mobile-optimized-text">
           This feature is under construction. We are working hard to bring you the complete Ryzor.cc experience. Check
           back soon!
         </p>
 
-        <div className="w-20 h-1 bg-red-500 mx-auto mb-8 rounded-full shadow-[0_0_10px_#ff0033,0_0_20px_#ff003366]"></div>
+        <div className="w-16 md:w-20 h-1 bg-red-500 mx-auto mb-6 md:mb-8 rounded-full shadow-[0_0_10px_#ff0033,0_0_20px_#ff003366]"></div>
 
-        <Button className="cyber-button text-lg px-8 py-4 w-full sm:w-auto" onClick={handleClose}>
+        <Button className="cyber-button touch-target-large text-base md:text-lg px-6 md:px-8 py-3 md:py-4 w-full sm:w-auto" onClick={handleClose}>
           Understood
         </Button>
       </CyberCard>

@@ -19,6 +19,50 @@
   }
 }
 
+/* Mobile-first responsive typography */
+.mobile-optimized-text {
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  line-height: 1.6;
+}
+
+.mobile-heading-xl {
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 1.1;
+}
+
+.mobile-heading-lg {
+  font-size: clamp(1.5rem, 6vw, 3rem);
+  line-height: 1.2;
+}
+
+.mobile-heading-md {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  line-height: 1.3;
+}
+
+/* Touch-friendly interactive elements */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 12px 16px;
+}
+
+.touch-target-large {
+  min-height: 56px;
+  min-width: 56px;
+  padding: 16px 24px;
+}
+
+/* Mobile-optimized spacing */
+.mobile-section-padding {
+  padding: clamp(2rem, 8vw, 4rem) clamp(1rem, 4vw, 2rem);
+}
+
+.mobile-container-padding {
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
 /* Custom cyberpunk styles */
 .font-mono {
   font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", "Courier New", monospace;
@@ -218,6 +262,13 @@
   background-size: 50px 50px;
 }
 
+/* Mobile-optimized grid pattern */
+@media (max-width: 768px) {
+  .grid-pattern {
+    background-size: 30px 30px;
+  }
+}
+
 .glitch {
   animation: glitch 2s infinite;
 }
@@ -406,6 +457,13 @@
   animation: grid-shift 20s ease-in-out infinite;
 }
 
+/* Mobile-optimized animated grid */
+@media (max-width: 768px) {
+  .animated-grid {
+    background-size: 40px 40px;
+  }
+}
+
 .animated-grid::before {
   content: "";
   position: absolute;
@@ -417,6 +475,13 @@
   animation: grid-pulse 8s ease-in-out infinite alternate;
 }
 
+/* Mobile-optimized grid before element */
+@media (max-width: 768px) {
+  .animated-grid::before {
+    background-size: 20px 20px;
+  }
+}
+
 .animated-grid::after {
   content: "";
   position: absolute;
@@ -426,6 +491,13 @@
     radial-gradient(circle at 80% 50%, rgba(255, 0, 51, 0.15) 1px, transparent 1px);
   background-size: 160px 160px;
   animation: grid-glitch 12s linear infinite;
+}
+
+/* Mobile-optimized grid after element */
+@media (max-width: 768px) {
+  .animated-grid::after {
+    background-size: 80px 80px;
+  }
 }
 
 @keyframes grid-shift {
@@ -506,6 +578,21 @@
   height: 100%;
   background: radial-gradient(ellipse 400px 600px at 50% 20%, rgba(200, 0, 40, 0.04) 0%, transparent 60%);
   animation: fog-drift-3 35s ease-in-out infinite;
+}
+
+/* Mobile-optimized fog layers */
+@media (max-width: 768px) {
+  .fog-layer-1 {
+    background: radial-gradient(ellipse 400px 200px at 20% 30%, rgba(255, 0, 51, 0.06) 0%, transparent 50%);
+  }
+  
+  .fog-layer-2 {
+    background: radial-gradient(ellipse 300px 150px at 80% 70%, rgba(255, 20, 60, 0.04) 0%, transparent 50%);
+  }
+  
+  .fog-layer-3 {
+    background: radial-gradient(ellipse 200px 300px at 50% 20%, rgba(200, 0, 40, 0.03) 0%, transparent 60%);
+  }
 }
 
 @keyframes fog-drift-1 {
@@ -633,6 +720,13 @@
   position: relative;
 }
 
+/* Mobile-optimized cyber title */
+@media (max-width: 768px) {
+  .cyber-title {
+    filter: drop-shadow(0 0 4px rgba(255, 0, 51, 0.5)) drop-shadow(0 0 8px rgba(255, 0, 51, 0.3));
+  }
+}
+
 .glitch-text-effect {
   animation: glitch-flicker 4s infinite;
 }
@@ -644,6 +738,13 @@
   display: inline-block;
 }
 
+/* Mobile-optimized neon accent */
+@media (max-width: 768px) {
+  .neon-accent {
+    filter: drop-shadow(0 0 3px #ff0033) drop-shadow(0 0 6px #ff0033);
+  }
+}
+
 .cyber-glass-card {
   background: rgba(13, 13, 13, 0.4);
   backdrop-filter: blur(20px);
@@ -653,6 +754,15 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden; /* Changed from visible to hidden for card itself */
+}
+
+/* Mobile-optimized cyber glass card */
+@media (max-width: 768px) {
+  .cyber-glass-card {
+    backdrop-filter: blur(15px);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 0, 51, 0.1);
+  }
 }
 
 .cyber-glass-card::before {
@@ -674,6 +784,14 @@
   position: relative;
 }
 
+/* Mobile-optimized hover effects */
+@media (max-width: 768px) {
+  .cyber-glass-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 0, 51, 0.3);
+  }
+}
+
 .cyber-button {
   position: relative;
   background: rgba(255, 0, 51, 0.1);
@@ -684,6 +802,14 @@
   font-weight: 600;
   overflow: hidden;
   transition: all 0.3s ease;
+}
+
+/* Mobile-optimized cyber button */
+@media (max-width: 768px) {
+  .cyber-button {
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+  }
 }
 
 .cyber-button::before {
@@ -709,6 +835,14 @@
   color: white;
 }
 
+/* Mobile-optimized button hover */
+@media (max-width: 768px) {
+  .cyber-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(255, 0, 51, 0.4);
+  }
+}
+
 .cyber-button-primary {
   background: linear-gradient(135deg, rgba(255, 0, 51, 0.8), rgba(200, 0, 40, 0.9));
   border: 1px solid rgba(255, 0, 51, 0.6);
@@ -718,6 +852,13 @@
 .cyber-button-primary:hover {
   background: linear-gradient(135deg, rgba(255, 0, 51, 1), rgba(200, 0, 40, 1));
   box-shadow: 0 0 40px rgba(255, 0, 51, 0.6), 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile-optimized primary button hover */
+@media (max-width: 768px) {
+  .cyber-button-primary:hover {
+    box-shadow: 0 0 20px rgba(255, 0, 51, 0.6), 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
 }
 
 .cyber-badge {
@@ -733,6 +874,16 @@
   letter-spacing: 0.5px;
   filter: drop-shadow(0 0 8px rgba(255, 0, 51, 0.4));
   box-shadow: 0 0 15px rgba(255, 0, 51, 0.3);
+}
+
+/* Mobile-optimized cyber badge */
+@media (max-width: 768px) {
+  .cyber-badge {
+    font-size: 0.6875rem;
+    padding: 3px 8px;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 51, 0.4));
+    box-shadow: 0 0 8px rgba(255, 0, 51, 0.3);
+  }
 }
 
 .spotlight-container {
@@ -756,6 +907,17 @@
   opacity: 0;
 }
 
+/* Mobile-optimized spotlight */
+@media (max-width: 768px) {
+  .spotlight-container::before {
+    background: radial-gradient(
+      300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(255, 0, 51, 0.04) 0%,
+      transparent 40%
+    );
+  }
+}
+
 .spotlight-container:hover::before {
   opacity: 1;
 }
@@ -769,6 +931,15 @@
   /* overflow: hidden; */ /* Let wrapper handle overflow for animation */
 }
 
+/* Mobile-optimized cyber terminal */
+@media (max-width: 768px) {
+  .cyber-terminal {
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 0, 51, 0.1);
+  }
+}
+
 .cyber-terminal-header {
   background: rgba(255, 0, 51, 0.1);
   border-bottom: 1px solid rgba(255, 0, 51, 0.2);
@@ -780,6 +951,15 @@
   font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Consolas", "Courier New", monospace;
   font-size: 0.875rem; /* text-sm */
   color: #ff0033; /* Default text color for the header */
+}
+
+/* Mobile-optimized terminal header */
+@media (max-width: 768px) {
+  .cyber-terminal-header {
+    padding: 8px 12px;
+    border-radius: 8px 8px 0 0;
+    font-size: 0.75rem;
+  }
 }
 
 .slide-in-up {
@@ -798,6 +978,21 @@
   animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   opacity: 0;
   transform: translateX(30px);
+}
+
+/* Mobile-optimized slide animations */
+@media (max-width: 768px) {
+  .slide-in-up {
+    transform: translateY(20px);
+  }
+  
+  .slide-in-left {
+    transform: translateX(-20px);
+  }
+  
+  .slide-in-right {
+    transform: translateX(20px);
+  }
 }
 
 @keyframes slideInUp {
@@ -845,6 +1040,13 @@
   filter: drop-shadow(0 0 8px rgba(255, 0, 51, 0.7)) drop-shadow(0 0 15px rgba(255, 0, 51, 0.5)) brightness(1.1);
 }
 
+/* Mobile-optimized text glow */
+@media (max-width: 768px) {
+  .text-glow-effect {
+    filter: drop-shadow(0 0 4px rgba(255, 0, 51, 0.7)) drop-shadow(0 0 8px rgba(255, 0, 51, 0.5)) brightness(1.1);
+  }
+}
+
 @keyframes title-subtle-visual-glitch {
   0%,
   100% {
@@ -864,5 +1066,81 @@
   40% {
     transform: translate(-0.2px, -0.2px) skew(-0.05deg);
     opacity: 1;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce motion for mobile performance */
+  @media (prefers-reduced-motion: reduce) {
+    .cyber-title,
+    .neon-accent,
+    .pulse-red,
+    .glitch,
+    .animated-grid,
+    .fog-layer-1,
+    .fog-layer-2,
+    .fog-layer-3,
+    .scanlines-overlay,
+    .digital-noise-overlay {
+      animation: none;
+    }
+  }
+  
+  /* Optimize touch interactions */
+  .cyber-button,
+  .cyber-button-primary {
+    -webkit-tap-highlight-color: rgba(255, 0, 51, 0.3);
+    touch-action: manipulation;
+  }
+  
+  /* Improve text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Optimize scrolling performance */
+  .cyber-background,
+  .animated-grid,
+  .digital-fog {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .cyber-title {
+    filter: drop-shadow(0 0 4px rgba(255, 0, 51, 0.6)) drop-shadow(0 0 8px rgba(255, 0, 51, 0.4));
+  }
+  
+  .neon-accent {
+    filter: drop-shadow(0 0 3px #ff0033) drop-shadow(0 0 6px #ff0033);
+  }
+}
+
+/* Landscape mobile optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+  .mobile-section-padding {
+    padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem);
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 320px) {
+  .cyber-glass-card {
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+  }
+  
+  .cyber-terminal {
+    border-radius: 6px;
+    backdrop-filter: blur(8px);
+  }
+  
+  .cyber-terminal-header {
+    padding: 6px 8px;
+    font-size: 0.6875rem;
   }
 }
