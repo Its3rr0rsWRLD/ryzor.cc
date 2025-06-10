@@ -10,7 +10,9 @@ import { Shield, Zap, Database, Key, Users, Eye, Cloud, Terminal, Check } from "
 import { EnhancedTextGlow } from "@/components/enhanced-text-glow"
 import { CyberCard } from "@/components/cyber-card"
 import { ComingSoonPopup } from "@/components/coming-soon-popup"
-import { ArrowRight, ExternalLink } from "lucide-react" // Ensure these are imported if not already
+import { ArrowRight, ExternalLink, ListTree, Copy, Code } from "lucide-react"
+import { TypeAnimation } from "react-type-animation"
+import Link from "next/link" // Import Link from next/link
 
 export default function RyzorLanding() {
   const [isHoveringTitle, setIsHoveringTitle] = useState(false)
@@ -20,19 +22,19 @@ export default function RyzorLanding() {
   const [glitchText, setGlitchText] = useState(originalText)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isHeroTerminalVisible, setIsHeroTerminalVisible] = useState(false)
 
   // Generates a more subtle character glitch
   const generateSubtleGlitchedText = (textToGlitch: string) => {
     let glitched = ""
     let changesMade = 0
-    const maxChanges = 1 // Allow only 1 or 2 character changes per glitch update
+    const maxChanges = 1
 
     for (let i = 0; i < textToGlitch.length; i++) {
       const char = textToGlitch[i]
       const randomThreshold = Math.random()
 
       if (changesMade < maxChanges && randomThreshold < 0.1) {
-        // Low chance to change a char
         if ((char === "o" || char === "O") && Math.random() < 0.7) {
           glitched += "0"
           changesMade++
@@ -46,8 +48,6 @@ export default function RyzorLanding() {
         glitched += char
       }
     }
-    // If no changes were made but we wanted one (e.g. for a noticeable flicker)
-    // ensure at least one very minor change like a case flip if possible.
     if (changesMade === 0 && textToGlitch.length > 0) {
       const randomIndex = Math.floor(Math.random() * textToGlitch.length)
       const charToChange = textToGlitch[randomIndex]
@@ -55,7 +55,6 @@ export default function RyzorLanding() {
         const originalChars = glitched.split("")
         originalChars[randomIndex] = Math.random() < 0.5 ? charToChange.toUpperCase() : charToChange.toLowerCase()
         if (originalChars[randomIndex] === charToChange && charToChange.toLowerCase() === "o") {
-          // if case flip didn't change 'o'
           originalChars[randomIndex] = "0"
         }
         glitched = originalChars.join("")
@@ -70,7 +69,7 @@ export default function RyzorLanding() {
 
   useEffect(() => {
     const normalGlitchLogic = () => {
-      const glitchDuration = Math.random() * 100 + 50 // 50-150ms visible glitch
+      const glitchDuration = Math.random() * 100 + 50
       setGlitchText(generateSubtleGlitchedText(originalText))
       setTimeout(() => {
         if (!isHoveringTitle) {
@@ -89,8 +88,8 @@ export default function RyzorLanding() {
         glitchIntervalRef.current = null
       }
       if (!hoverGlitchIntervalRef.current) {
-        hoverGlitchLogic() // Initial glitch on hover
-        hoverGlitchIntervalRef.current = setInterval(hoverGlitchLogic, 150) // Subtle changes every 150ms on hover
+        hoverGlitchLogic()
+        hoverGlitchIntervalRef.current = setInterval(hoverGlitchLogic, 150)
       }
     } else {
       if (hoverGlitchIntervalRef.current) {
@@ -99,7 +98,7 @@ export default function RyzorLanding() {
       }
       setGlitchText(originalText)
       if (!glitchIntervalRef.current) {
-        setTimeout(normalGlitchLogic, Math.random() * 1500 + 800) // Normal interval: 0.8-2.3 seconds
+        setTimeout(normalGlitchLogic, Math.random() * 1500 + 800)
         glitchIntervalRef.current = setInterval(normalGlitchLogic, Math.random() * 2000 + 1000)
       }
     }
@@ -135,61 +134,49 @@ export default function RyzorLanding() {
     return () => document.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
+  // Hero terminal visibility logic
+  useEffect(() => {
+    const cardAnimationEndTime = 1100 // slide-in-up (0.8s) + delay-300 (0.3s)
+    const timer = setTimeout(() => {
+      setIsHeroTerminalVisible(true)
+    }, cardAnimationEndTime)
+    return () => clearTimeout(timer)
+  }, [])
+
   const features = [
-    {
-      icon: Zap,
-      title: "Nitro Sniper",
-      description: "Ultra-fast, cloud-based, never sleeps",
-    },
-    {
-      icon: Database,
-      title: "Account Backups",
-      description: "Full server/DM/sticker archive",
-    },
-    {
-      icon: Key,
-      title: "Token Vault",
-      description: "AES-256, encrypted client-side only",
-    },
-    {
-      icon: Users,
-      title: "Auto Joiner",
-      description: "Mass-join links instantly",
-    },
-    {
-      icon: Eye,
-      title: "Presence Spoofer",
-      description: "Fake online status, any mode",
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Control",
-      description: "Full control from any device, no install",
-    },
+    { icon: Zap, title: "Nitro Sniper", description: "Ultra-fast, cloud-based, never sleeps" },
+    { icon: Database, title: "Account Backups", description: "Full server/DM/sticker archive" },
+    { icon: Key, title: "Token Vault", description: "AES-256, encrypted client-side only" },
+    { icon: Users, title: "Auto Joiner", description: "Mass-join links instantly" },
+    { icon: Eye, title: "Presence Spoofer", description: "Fake online status, any mode" },
+    { icon: Cloud, title: "Cloud Control", description: "Full control from any device, no install" },
+    { icon: ListTree, title: "Server Scraper", description: "Extract member lists, channels, roles, and more." },
+    { icon: Copy, title: "Server Cloner", description: "Duplicate entire Discord servers with ease." },
+    { icon: Code, title: "Open Source", description: "Transparency and community-driven development." },
   ]
 
   const testimonials = [
-    {
-      user: "@rooted",
-      message: "Faster snipes, zero crashes.",
-    },
-    {
-      user: "@sn1peGod",
-      message: "Actually secure. Been waiting for this.",
-    },
-    {
-      user: "@w1zard",
-      message: "Cleanest UI I've used. Period.",
-    },
+    { user: "@ariadne", message: "Looks nice, and you can view without JS!" },
+    { user: "@sn1peGod", message: "Actually secure. Been waiting for this." },
+    { user: "@w1zard", message: "Cleanest UI I've used. Period." },
   ]
 
   const [isPopupOpen, setIsPopupOpen] = useState(false)
-
   const openPopup = (e: React.MouseEvent) => {
-    e.preventDefault() // Prevent default anchor behavior if buttons were links
+    e.preventDefault()
     setIsPopupOpen(true)
   }
   const closePopup = () => setIsPopupOpen(false)
+
+  const heroCardAnimationDuration = 800
+  const heroCardDelay = 300
+  const heroTerminalExpansionDelayStart = heroCardAnimationDuration + heroCardDelay
+  const heroTerminalExpansionDuration = 500 // Duration of the bottom-up expansion
+  // const promptStartDelay = heroTerminalExpansionDelayStart + heroTerminalExpansionDuration + 100; // No longer needed for ryzor@cloud:~$
+
+  const securityTerminalCardAnimationDelay = 200
+  const securityTerminalCardAnimationDuration = 800
+  const securityTerminalBaseDelay = securityTerminalCardAnimationDelay + securityTerminalCardAnimationDuration
 
   return (
     <div ref={containerRef} className="min-h-screen text-white overflow-x-hidden spotlight-container">
@@ -210,7 +197,7 @@ export default function RyzorLanding() {
           <div className="mb-12 slide-in-up" style={{ minHeight: "fit-content", overflow: "visible" }}>
             <div className="mb-8" style={{ overflow: "visible", minHeight: "fit-content" }}>
               <h1
-                className="text-7xl md:text-9xl font-bold font-display mb-6 cyber-title" // cyber-title now includes subtle visual glitch animation
+                className="text-7xl md:text-9xl font-bold font-display mb-6 cyber-title"
                 onMouseEnter={handleTitleMouseEnter}
                 onMouseLeave={handleTitleMouseLeave}
                 style={{ cursor: "pointer" }}
@@ -249,26 +236,32 @@ export default function RyzorLanding() {
               </div>
               <span className="font-mono text-sm text-gray-400">ryzor.cc/dashboard</span>
             </div>
-            <div className="cyber-terminal">
-              <div className="cyber-terminal-header">
-                <span className="text-[#ff0033] font-mono">ryzor@cloud:~$</span>
-              </div>
-              <div className="p-6 font-mono text-sm space-y-2">
-                <div className="text-green-400 flex items-center justify-center w-full">
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>✓ NITRO CLAIMED — in
-                  0.29s
+            {/* This is the container that will expand from the bottom */}
+            <div
+              className={`terminal-content-container ${isHeroTerminalVisible ? "terminal-content-container-expanded" : ""}`}
+            >
+              <div className="cyber-terminal">
+                {" "}
+                {/* This is the actual terminal box style */}
+                {/* Removed the ryzor@cloud:~$ TypeAnimation and its header */}
+                <div className="p-6 font-mono text-sm space-y-2">
+                  <div className="text-green-400 flex items-center justify-center w-full">
+                    <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-pulse"></span>✓ NITRO CLAIMED — in
+                    0.29s
+                  </div>
+                  <div className="text-blue-400">→ Monitoring 47 servers...</div>
+                  <div className="text-yellow-400">⚡ Queue: 3 pending</div>
+                  <div className="text-[#ff0033]">Status: ONLINE | Tokens: SECURE</div>
                 </div>
-                <div className="text-blue-400">→ Monitoring 47 servers...</div>
-                <div className="text-yellow-400">⚡ Queue: 3 pending</div>
-                <div className="text-[#ff0033]">Status: ONLINE | Tokens: SECURE</div>
-                <div className="terminal-cursor"></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-32 px-4">
+      <section className="py-16 px-4">
+        {" "}
+        {/* Changed py-32 to py-16 */}
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-20 slide-in-up">
             <h2 className="text-5xl md:text-7xl font-bold mb-6 slide-in-up cyber-title">
@@ -278,7 +271,6 @@ export default function RyzorLanding() {
               </EnhancedTextGlow>
             </h2>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-0">
             {features.map((feature, index) => (
               <CyberCard key={index} className={`p-8 slide-in-up delay-${(index + 1) * 100}`}>
@@ -305,7 +297,6 @@ export default function RyzorLanding() {
               <Button className="cyber-button">Joiner</Button>
               <Button className="cyber-button">Vault</Button>
             </div>
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               <div className="space-y-6 slide-in-left delay-200">
                 <div className="cyber-glass-card p-6">
@@ -327,7 +318,6 @@ export default function RyzorLanding() {
                     </div>
                   </div>
                 </div>
-
                 <div className="cyber-glass-card p-6">
                   <div className="flex items-center justify-between mb-4">
                     <span className="font-semibold">Auto-Claim</span>
@@ -339,11 +329,10 @@ export default function RyzorLanding() {
                   </div>
                 </div>
               </div>
-
               <div className="slide-in-right delay-300">
                 <div className="cyber-terminal">
                   <div className="cyber-terminal-header">
-                    <Terminal className="h-4 w-4 text-[#ff0033] mr-2" />
+                    <Terminal className="h-4 w-4 text-[#ff0033]" />
                     <span className="text-[#ff0033] font-mono">Live Terminal</span>
                   </div>
                   <div className="p-6 font-mono text-sm space-y-3">
@@ -369,20 +358,60 @@ export default function RyzorLanding() {
               Period.
             </EnhancedTextGlow>
           </h2>
-
           <div className="max-w-5xl mx-auto">
             <div className="cyber-terminal mb-12 slide-in-up delay-200">
               <div className="cyber-terminal-header">
-                <Terminal className="h-5 w-5 text-[#ff0033] mr-2" />
-                <span className="text-[#ff0033]">Security Protocol</span>
+                <Terminal className="h-5 w-5 text-[#ff0033]" />
+                <TypeAnimation
+                  sequence={[securityTerminalBaseDelay + 200, "Security Protocol"]}
+                  speed={50}
+                  className="text-[#ff0033] font-mono"
+                  cursor={true}
+                  repeat={0}
+                  wrapper="span"
+                />
               </div>
               <div className="p-8 text-left font-mono">
-                <div className="text-[#ff0033] mb-2">$ encrypt --token ************ --AES256</div>
-                <div className="text-green-400 mb-2">✔ Success. Your token never left your browser.</div>
-                <div className="text-blue-400 mb-2">→ Client-side encryption active</div>
-                <div className="text-yellow-400 mb-2">→ Zero server retention policy</div>
-                <div className="text-purple-400">→ Open source verification available</div>
-                <div className="terminal-cursor mt-4"></div>
+                <TypeAnimation
+                  sequence={[securityTerminalBaseDelay + 800, "$ encrypt --token ************ --AES256"]}
+                  speed={30}
+                  className="text-[#ff0033] mb-2 block"
+                  cursor={false}
+                  repeat={0}
+                  wrapper="span"
+                />
+                <TypeAnimation
+                  sequence={[securityTerminalBaseDelay + 2200, "✔ Success. Your token doesn't save to the server."]}
+                  speed={30}
+                  className="text-green-400 mb-2 block"
+                  cursor={false}
+                  repeat={0}
+                  wrapper="span"
+                />
+                <TypeAnimation
+                  sequence={[securityTerminalBaseDelay + 3700, "→ Client-side encryption active"]}
+                  speed={30}
+                  className="text-blue-400 mb-2 block"
+                  cursor={false}
+                  repeat={0}
+                  wrapper="span"
+                />
+                <TypeAnimation
+                  sequence={[securityTerminalBaseDelay + 5000, "→ Zero server retention policy"]}
+                  speed={30}
+                  className="text-yellow-400 mb-2 block"
+                  cursor={false}
+                  repeat={0}
+                  wrapper="span"
+                />
+                <TypeAnimation
+                  sequence={[securityTerminalBaseDelay + 6300, "→ Open source verification available"]}
+                  speed={30}
+                  className="text-purple-400 block"
+                  cursor={true}
+                  repeat={0}
+                  wrapper="span"
+                />
               </div>
             </div>
 
@@ -430,7 +459,6 @@ export default function RyzorLanding() {
               Zero Cost.
             </EnhancedTextGlow>
           </h2>
-
           <div className="max-w-lg mx-auto slide-in-up delay-200">
             <Card className="cyber-glass-card p-10 pulse-glow">
               <div className="text-6xl mb-6">🔓</div>
@@ -440,7 +468,7 @@ export default function RyzorLanding() {
                 </EnhancedTextGlow>
               </h3>
               <div className="space-y-4 mb-10 text-left">
-                {["Full tool access", "No usage limits", "Encrypted backups", "No credit cards, no signups"].map(
+                {["Full tool access", "No usage limits", "Encrypted backups", "No credit cards"].map(
                   (feature, index) => (
                     <div key={index} className="flex items-center">
                       <Check className="h-6 w-6 text-green-400 mr-4" />
@@ -449,9 +477,7 @@ export default function RyzorLanding() {
                   ),
                 )}
               </div>
-              <Button className="cyber-button-primary w-full text-xl py-6 mb-6">
-                Start Using Ryzor – No Signups, No BS
-              </Button>
+              <Button className="cyber-button-primary w-full text-xl py-6 mb-6">Start Using Ryzor – 100% Free</Button>
               <p className="text-gray-400">No credit card. No trials. Just power.</p>
             </Card>
           </div>
@@ -467,15 +493,22 @@ export default function RyzorLanding() {
                 This platform is free for all. Built for the underground.
               </p>
             </div>
-
             <div className="flex flex-wrap gap-8 text-sm">
-              {["Zero-Access Security Policy", "Discord TOS Disclaimer", "Contact: support@ryzor.cc"].map(
-                (link, index) => (
-                  <a key={index} href="#" className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300">
-                    {link}
-                  </a>
-                ),
-              )}
+              <Link
+                href="/zero-access-security-policy"
+                className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300"
+              >
+                Zero-Access Security Policy
+              </Link>
+              <Link
+                href="/discord-tos-disclaimer"
+                className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300"
+              >
+                Discord TOS Disclaimer
+              </Link>
+              <a href="#" className="text-gray-400 hover:text-[#ff0033] transition-colors duration-300">
+                Contact: support@ryzor.cc
+              </a>
             </div>
           </div>
         </div>
