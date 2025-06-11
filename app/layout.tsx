@@ -17,14 +17,12 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ryzor.cc"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Ryzor.cc - Your Cloud-Based Discord Arsenal",
     description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free. Nitro sniper, account backups, token vault, and more - all 100% free.",
-    url: "https://ryzor.cc",
     siteName: "Ryzor.cc",
     images: [
       {
