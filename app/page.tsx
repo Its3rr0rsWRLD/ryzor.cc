@@ -10,6 +10,7 @@ import { Shield, Zap, Database, Key, Users, Eye, Cloud, Terminal, Check } from "
 import { EnhancedTextGlow } from "@/components/enhanced-text-glow"
 import { CyberCard } from "@/components/cyber-card"
 import { ComingSoonPopup } from "@/components/coming-soon-popup"
+import { MouseCRTEffect } from "@/components/mouse-crt-effect"
 import { ArrowRight, ExternalLink, ListTree, Copy, Code } from "lucide-react"
 import { TypeAnimation } from "react-type-animation"
 import Link from "next/link" // Import Link from next/link
@@ -177,9 +178,9 @@ export default function RyzorLanding() {
   const securityTerminalCardAnimationDelay = 200
   const securityTerminalCardAnimationDuration = 800
   const securityTerminalBaseDelay = securityTerminalCardAnimationDelay + securityTerminalCardAnimationDuration
-
   return (
     <div ref={containerRef} className="min-h-screen text-white overflow-x-hidden spotlight-container">
+      <MouseCRTEffect />
       <div className="cyber-background">
         <div className="animated-grid parallax-slow" />
         <div className="digital-fog parallax-medium">
@@ -475,7 +476,12 @@ export default function RyzorLanding() {
                   ),
                 )}
               </div>
-              <Button className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-5 md:py-6 mb-4 md:mb-6">Start Using Ryzor – 100% Free</Button>
+                <Button
+                className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-5 md:py-6 mb-4 md:mb-6"
+                onClick={() => (window.location.href = "/signup")}
+                >
+                Hell Yea! Sign Me Up!
+                </Button>
               <p className="text-gray-400 mobile-optimized-text">No credit card. No trials. Just power.</p>
             </Card>
           </div>

@@ -6,7 +6,6 @@ export async function POST(req: Request) {
     if (!token) {
       return NextResponse.json({ ok: false, error: "Missing token" }, { status: 400 })
     }
-    // Validate token by fetching user info from Discord
     const discordRes = await fetch("https://discord.com/api/v9/users/@me", {
       headers: {
         "Authorization": token

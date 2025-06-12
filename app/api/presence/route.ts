@@ -1,4 +1,3 @@
-// API route for updating user presence on Discord
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {

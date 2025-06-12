@@ -32,6 +32,7 @@ export default function SignupPage() {
     setLoading(true)
     setError(null)
     setSuccess(null)
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -41,7 +42,16 @@ export default function SignupPage() {
     })
     setLoading(false)
     if (error) {
-      setError(error.message)
+      // Show a specific error if the email is already registered
+      if (
+        error.message.toLowerCase().includes("user already registered") ||
+        error.message.toLowerCase().includes("email already registered") ||
+        error.message.toLowerCase().includes("already exists")
+      ) {
+        setError("This email is already registered. Please log in or use a different email.")
+      } else {
+        setError(error.message)
+      }
       return
     }
     if (data.user && !data.user.email_confirmed_at) {
@@ -84,7 +94,7 @@ export default function SignupPage() {
       <section className="relative min-h-screen flex items-center justify-center mobile-container-padding">
         <div className="container mx-auto text-center z-10 max-w-md px-4">
           <Card className="cyber-glass-card p-8 md:p-10 slide-in-up rounded-2xl">
-            <h1 className="mobile-heading-xl font-bold font-display mb-6 cyber-title">Sign up for Ryzor.cc</h1>
+            <h1 className="mobile-heading-xl font-bold font-display mb-6 cyber-title">Sign Up</h1>
             <form onSubmit={handleSignup} className="space-y-6">
               <input
                 type="email"

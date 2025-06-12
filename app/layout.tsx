@@ -24,7 +24,6 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Ryzor.cc - Your Cloud-Based Discord Arsenal",
     description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free. Nitro sniper, account backups, token vault, and more - all 100% free.",
-    url: "https://ryzor.cc",
     siteName: "Ryzor.cc",
     images: [
       {
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
     title: "Ryzor.cc - Your Cloud-Based Discord Arsenal",
     description: "Your cloud-based Discord arsenal. Always-on, always one step ahead, and always free. Nitro sniper, account backups, token vault, and more - all 100% free.",
     images: ["/og-image.png"],
-    creator: "@ryzorcc",
+    creator: "@its3rr0rswrld",
   },
   robots: {
     index: true,
@@ -56,7 +55,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code", // Replace with actual verification code
+    google: "your-google-verification-code",
   },
   category: "technology",
   generator: 'v0.dev'
@@ -84,7 +83,11 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="min-h-screen overflow-y-scroll">{/* Main content wrapper for always-visible scrollbar */}
+          {children}
+        </div>
+      </body>
     </html>
   )
 }

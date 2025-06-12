@@ -33,7 +33,15 @@ export default function LoginPage() {
     })
     setLoading(false)
     if (error) {
-      setError(error.message)
+      if (
+        error.message.toLowerCase().includes("invalid login credentials") ||
+        error.message.toLowerCase().includes("invalid password") ||
+        error.message.toLowerCase().includes("wrong password")
+      ) {
+        setError("Incorrect password. Please try again.")
+      } else {
+        setError(error.message)
+      }
       return
     }
     if (data.user && !data.user.email_confirmed_at) {
@@ -92,13 +100,13 @@ export default function LoginPage() {
       <section className="relative min-h-screen flex items-center justify-center mobile-container-padding">
         <div className="container mx-auto text-center z-10 max-w-md px-4">
           <Card className="cyber-glass-card p-8 md:p-10 slide-in-up rounded-2xl">
-            <h1 className="mobile-heading-xl font-bold font-display mb-6 cyber-title">Log in to Ryzor.cc</h1>
+            <h1 className="mobile-heading-xl font-bold font-display mb-6 cyber-title text-red-400">Log in to Ryzor.cc</h1>
             <form onSubmit={handleLogin} className="space-y-6">
               <input
                 type="email"
                 required
                 placeholder="Email"
-                className="w-full p-3 rounded-lg bg-black/60 border border-cyan-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="w-full p-3 rounded-lg bg-black/60 border border-red-400 text-white focus:outline-none focus:ring-2 focus:ring-red-400"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
                 autoComplete="email"
@@ -107,31 +115,32 @@ export default function LoginPage() {
                 type="password"
                 required
                 placeholder="Password"
-                className="w-full p-3 rounded-lg bg-black/60 border border-cyan-400 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="w-full p-3 rounded-lg bg-black/60 border border-red-400 text-white focus:outline-none focus:ring-2 focus:ring-red-400"
                 value={password}
                 onChange={e => setPassword(e.target.value)}
                 autoComplete="current-password"
               />
               <Button
                 type="submit"
-                className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-4 md:py-5 rounded-xl mt-2"
+                className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-4 md:py-5 rounded-xl mt-2 bg-red-600 hover:bg-red-700 border-none"
                 disabled={loading}
               >
                 {loading ? "Logging in..." : "Log in"}
               </Button>
-            </form>
-            <Button
+            </form>            <Button
               onClick={handleOAuth}
-              className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-4 md:py-5 rounded-xl mt-4"
+              className="cyber-button-primary w-full touch-target-large text-lg md:text-xl py-4 md:py-5 rounded-xl mt-4 bg-red-600 hover:bg-red-700 border-none"
               disabled={loading}
             >
               {loading ? "Loading..." : "Log in with Discord"}
             </Button>
+            {error && <div className="text-red-400 mt-4">{error}</div>}
+            {success && <div className="text-green-400 mt-4">{success}</div>}
             {/* Password reset link */}
-            <div className="mt-4 text-cyan-200 text-sm">
+            <div className="mt-4 text-red-200 text-sm">
               <button
                 type="button"
-                className="underline hover:text-cyan-400 transition-colors"
+                className="underline hover:text-red-400 transition-colors"
                 onClick={() => setShowResetPopup(true)}
               >
                 Forgot your password?
@@ -173,7 +182,7 @@ export default function LoginPage() {
               </div>
             )}
             {/* Signup link */}
-            <div className="mt-6 text-cyan-300">
+            <div className="mt-6 text-red-300">
               Don't have an account? <a href="/signup" className="underline">Sign up</a>
             </div>
           </Card>
