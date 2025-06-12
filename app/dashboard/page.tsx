@@ -386,7 +386,7 @@ export default function DashboardPage() {
           const totalErrors = stats.errors.length
           const successRate = totalErrors > 0 ? Math.max(90 - Math.floor(totalErrors / 10), 50) : 96
           
-          // Update statistics with live data - force servers and users to 1
+          // Update statistics with live data - (forcing users and servers to 1 for demo purposes)
           setStats(prev => ({
             ...prev,
             totalServers: 1,

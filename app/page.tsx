@@ -13,7 +13,7 @@ import { ComingSoonPopup } from "@/components/coming-soon-popup"
 import { MouseCRTEffect } from "@/components/mouse-crt-effect"
 import { ArrowRight, ExternalLink, ListTree, Copy, Code } from "lucide-react"
 import { TypeAnimation } from "react-type-animation"
-import Link from "next/link" // Import Link from next/link
+import Link from "next/link"
 
 export default function RyzorLanding() {
   const [isHoveringTitle, setIsHoveringTitle] = useState(false)
@@ -25,7 +25,6 @@ export default function RyzorLanding() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isHeroTerminalVisible, setIsHeroTerminalVisible] = useState(false)
 
-  // Generates a more subtle character glitch
   const generateSubtleGlitchedText = (textToGlitch: string) => {
     let glitched = ""
     let changesMade = 0
@@ -135,9 +134,8 @@ export default function RyzorLanding() {
     return () => document.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
-  // Hero terminal visibility logic
   useEffect(() => {
-    const cardAnimationEndTime = 1100 // slide-in-up (0.8s) + delay-300 (0.3s)
+    const cardAnimationEndTime = 1100
     const timer = setTimeout(() => {
       setIsHeroTerminalVisible(true)
     }, cardAnimationEndTime)
@@ -172,8 +170,7 @@ export default function RyzorLanding() {
   const heroCardAnimationDuration = 800
   const heroCardDelay = 300
   const heroTerminalExpansionDelayStart = heroCardAnimationDuration + heroCardDelay
-  const heroTerminalExpansionDuration = 500 // Duration of the bottom-up expansion
-  // const promptStartDelay = heroTerminalExpansionDelayStart + heroTerminalExpansionDuration + 100; // No longer needed for ryzor@cloud:~$
+  const heroTerminalExpansionDuration = 500
 
   const securityTerminalCardAnimationDelay = 200
   const securityTerminalCardAnimationDuration = 800

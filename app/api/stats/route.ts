@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 
+// I'll make this later, just placeholder
 const globalStats = {
   totalUsers: 1247,
   activeTools: 0,
