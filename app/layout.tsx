@@ -17,7 +17,6 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://ryzor.cc"),
   alternates: {
     canonical: "/",
   },
